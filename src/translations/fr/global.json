@@ -1,0 +1,77 @@
+{
+  "headers": {
+    "menu": {
+      "1": "acceuil",
+      "2": "mes-propos",
+      "3": "compétences",
+      "31": "compétences & services",
+      "4": "projets",
+      "5": "contacts"
+    }
+  },
+  "body": {
+    "pres": "Bonjour, je suis",
+    "desc1": "Je crée des sites web responsives avec un design cool et de grandes performances",
+    "desc2": "Très talentueux et ouvert au travail",
+    "g_a_p": "Vous avez un projet",
+    "i_m": "en tête ?"
+  },
+  "info": {
+    "fname1": "Raly",
+    "fname2": "Andry",
+    "lname": "Ny Aina",
+    "job": "développeur full-stack",
+    "about": "Diplômé de l'École Nationale d'Informatique de Madagascar et toujours passionné par l'informatique, j'ai acquis une solide formation qui m'a permis de développer des compétences variées dans ce domaine. Mon portfolio présente une sélection de mes projets, allant de la programmation au développement web, en passant par l'intelligence artificielle et la gestion de bases de données. Chaque projet que vous découvrirez ici reflète ma passion, mon engagement et ma capacité à résoudre des problèmes complexes. Mon objectif est de continuer à innover et à fournir des solutions de haute qualité, que ce soit dans un cadre professionnel ou collaboratif. Je vous invite à explorer mes réalisations et à me contacter pour toute collaboration ou opportunité professionnelle.",
+    "mail": "ralyandrynyainakadmiel@gmail.com",
+    "logo_name": "NKadmiel",
+    "n": "+261 34 71 610 04"
+  },
+  "btn": {
+    "contact_me": "Contactez-moi !!",
+    "download_cv": "Télécharger CV",
+    "send": "Envoyer"
+  },
+  "skills": {
+    "code": "// voici tous les services que je peux fournir\n\nconst my_services = {\n  web_frontend_developement: [\"React\", \"HTML & CSS , JS\"],\n  mobile_frontend_developement: [\"Flutter\"],\n  backend_developement: [\"Spring Boot\", \"Express Js\", \"Golang\"],\n  tooling: [\"Golang\"],\n};\n\n/*Je peux aussi créer des applications de bureau avec Java et C#\nEngagez-moi maintenant !!*/",
+    "list": {
+      "1": "Framework",
+      "2": "Outils",
+      "3": "Bases de données",
+      "4": "Autres",
+      "5": "Langages de programmation",
+      "6": "Mobile",
+      "7": "Bases de données"
+    }
+  },
+  "works": {
+    "1": {
+      "image": "portfolio.png",
+      "technologies": "React Js Tailwind Css",
+      "title": "Portfolio",
+      "description": "Mon portfolio personnel"
+    },
+    "2": {
+      "image": "Capture.png",
+      "technologies": "MERN",
+      "title": "Immersion novice",
+      "description": "Une application pour aider les nouveaux bacheliers à s'intégrer dans le monde des technologies"
+    },
+    "3": {
+      "image": "image.png",
+      "technologies": "React JS Spring Boot MySQL",
+      "title": "Rapports SMMEC",
+      "description": "Un site web pour le reporting",
+      "isSecret": true
+    }
+  },
+  "form": {
+    "name": "Nom",
+    "email": "Email",
+    "title": "Titre",
+    "message": "Message"
+  },
+  "others": {
+    "p_n": "Numéro de téléphone",
+    "m_b_na": "Réalisé par Ny Aina"
+  }
+}

@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.title {
+  @apply text-2xl font-semibold;
+}
+
+.line {
+  @apply bg-primary opacity-50 h-0.5;
+}
+
+.input {
+  @apply bg-background border-1 border-secondary p-2;
+}

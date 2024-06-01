@@ -1,0 +1,77 @@
+{
+  "headers": {
+    "menu": {
+      "1": "home",
+      "2": "about-me",
+      "3": "skills",
+      "31": "skills & services",
+      "4": "works",
+      "5": "contacts"
+    }
+  },
+  "body": {
+    "pres": "Hi, i am",
+    "desc1": "I craft responsive websites with cool design and great performance",
+    "desc2": "Highly talented and open to work",
+    "g_a_p": "Got a project",
+    "i_m": "in mind ?"
+  },
+  "info": {
+    "fname1": "Raly",
+    "fname2": "Andry",
+    "lname": "Ny Aina",
+    "job": "full-stack developper",
+    "about": "A graduate of the National School of Informatics of Madagascar and always passionate about IT, I acquired solid training which allowed me to develop varied skills in this field. My portfolio presents a selection of my projects, ranging from programming to web development, including artificial intelligence and database management. Each project you will discover here reflects my passion, my commitment and my ability to solve complex problems. My goal is to continue to innovate and provide high quality solutions, whether in a professional or collaborative setting. I invite you to explore my achievements and to contact me for any collaboration or professional opportunity.",
+    "mail": "ralyandrynyainakadmiel@gmail.com",
+    "logo_name": "NKadmiel",
+    "n": "+261 34 71 610 04"
+  },
+  "btn": {
+    "contact_me": "Contact me!!",
+    "download_cv": "Download CV",
+    "send": "Send"
+  },
+  "skills": {
+    "code": "// there are all services that i can provide\n\nconst my_services = {\n  web_frontend_developement: [\"React\", \"HTML & CSS , JS\"],\n  mobile_frontend_developement: [\"Flutter\"],\n  backend_developement: [\"Spring Boot\", \"Express Js\", \"Golang\"],\n  tooling: [\"Golang\"],\n};\n\n/*I can also build desktop application with Java and C#\nHire me now !!*/",
+    "list": {
+      "1": "Framework",
+      "2": "Tools",
+      "3": "Databases",
+      "4": "Others",
+      "5": "Languages",
+      "6": "Mobile",
+      "7": "Databases"
+    }
+  },
+  "works": {
+    "1": {
+      "image": "portfolio.png",
+      "technologies": "React Js Tailwind Css",
+      "title": "Portfolio",
+      "description": "My personal portfolio"
+    },
+    "2": {
+      "image": "Capture.png",
+      "technologies": "MERN",
+      "title": "Novice immersion",
+      "description": "An application to help new bachelors integrate the world of technologies"
+    },
+    "3": {
+      "image": "image.png",
+      "technologies": "React JS Spring Boot MySQL",
+      "title": "SMMEC reporting",
+      "description": "A website for reporting",
+      "isSecret": true
+    }
+  },
+  "form": {
+    "name": "Name",
+    "email": "Email",
+    "title": "Title",
+    "message": "Message"
+  },
+  "others": {
+    "p_n": "Phone number",
+    "m_b_na": "Made by Ny Aina"
+  }
+}
