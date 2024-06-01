@@ -7,8 +7,6 @@ import Title from "./title";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
-const about_me = `A graduate of the National School of Informatics of Madagascar and always passionate about IT, I acquired solid training which allowed me to develop varied skills in this field. My portfolio presents a selection of my projects, ranging from programming to web development, including artificial intelligence and database management. Each project you will discover here reflects my passion, my commitment and my ability to solve complex problems. My goal is to continue to innovate and provide high quality solutions, whether in a professional or collaborative setting. I invite you to explore my achievements and to contact me for any collaboration or professional opportunity.`;
-
 export default function AboutMe() {
   const [t, i18n] = useTranslation("global");
   const imgRef = useRef(null);
