@@ -68,7 +68,7 @@ export default function Skills() {
   }, []);
 
   return (
-    <div id={t("headers.menu.3")} className="flex mt-28">
+    <div id={t("headers.menu.3")} className="flex pt-28">
       <Space />
       <div className="w-6/8 relative">
         <Title text={t("headers.menu.31")} lineWidth="2/6" />

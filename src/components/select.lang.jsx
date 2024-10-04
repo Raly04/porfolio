@@ -13,7 +13,7 @@ export default function SelectLang() {
     <select
       onChange={(e) => setLang(e.target.value)}
       value={lang}
-      className="bg-transparent text-foreground"
+      className="text-foreground bg-background"
     >
       <option value="en">EN</option>
       <option value="fr">FR</option>

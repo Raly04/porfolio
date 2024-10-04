@@ -38,12 +38,14 @@ export default function Works() {
       technologies: t("works.1.technologies"),
       title: t("works.1.title"),
       description: t("works.1.description"),
+      link : "https://github.com/Raly04/porfolio"
     },
     {
       image: p1,
       technologies: t("works.2.technologies"),
       title: t("works.2.title"),
       description: t("works.2.description"),
+      link : "https://github.com/Raly04/novice-immersion"
     },
     {
       image: smmec,
@@ -55,7 +57,7 @@ export default function Works() {
   ];
 
   return (
-    <div id={t("headers.menu.4")} className="flex mt-28">
+    <div id={t("headers.menu.4")} className="flex pt-28">
       <Space />
       <div className="w-6/8 relative">
         <Title text={t("headers.menu.4")} lineWidth="4/6" />
@@ -64,6 +66,7 @@ export default function Works() {
             <div key={index} ref={(el) => (workBoxRefs.current[index] = el)}>
               <WorkBox
                 image={box.image}
+                link={box.link}
                 technologies={box.technologies}
                 title={box.title}
                 description={box.description}

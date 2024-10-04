@@ -9,7 +9,7 @@ export function ThreeDCardDemo() {
           <div className="w-full">
             <img
               src={Image}
-              className="w-full xl:h-[500px] xl:w- h-full object-cover rounded-xl group-hover/card:shadow-xl"
+              className="w-full xl:h-[400px] xl:w- h-full object-cover rounded-xl group-hover/card:shadow-xl"
               alt="thumbnail"
             />
           </div>

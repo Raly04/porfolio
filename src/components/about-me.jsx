@@ -59,7 +59,7 @@ export default function AboutMe() {
     );
   }, []);
   return (
-    <div id={t("headers.menu.2")} className="flex mt-8">
+    <div id={t("headers.menu.2")} className="flex pt-28">
       <Space />
       <div className="w-6/8">
         <Title text={t("headers.menu.2")} lineWidth="3/6" />

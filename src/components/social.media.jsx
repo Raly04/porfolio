@@ -1,9 +1,14 @@
 export default function SocialMedia() {
+
+  const openTab = (link)=>{
+    window.open(link);
+  }
+
   return (
-    <div className="fixed hidden top-0 -left-20 xl:flex flex-col h-full w-1/8 justify-center items-center">
+    <div className="ml-6 fixed hidden top-0 -left-20 xl:flex flex-col h-full w-1/8 justify-center items-center">
       <div className="bg-secondary w-0.5 h-full opacity-50"></div>
       <div className="">
-        <a href="https://github.com/Raly04">
+        <div onClick={()=>openTab("https://github.com/Raly04")}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
@@ -17,8 +22,8 @@ export default function SocialMedia() {
               className="color000000 svgShape"
             ></path>
           </svg>
-        </a>
-        <a href="https://www.linkedin.com/in/raly-andry-ny-aina-kadmiel-1768aa280/">
+        </div>
+        <div onClick={()=>openTab("https://www.linkedin.com/in/raly-andry-ny-aina-kadmiel-1768aa280/")}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
@@ -32,8 +37,8 @@ export default function SocialMedia() {
               className="color000000 svgShape"
             ></path>
           </svg>
-        </a>
-        <a href="https://www.facebook.com/nyaina.raly/">
+        </div>
+        <div onClick={()=>openTab("https://www.facebook.com/nyaina.raly/")}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
@@ -47,7 +52,7 @@ export default function SocialMedia() {
               className="color000000 svgShape"
             ></path>
           </svg>
-        </a>
+        </div>
         <a href="">
           <svg
             xmlns="http://www.w3.org/2000/svg"

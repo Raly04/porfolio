@@ -84,7 +84,7 @@ function Contacts() {
       );
   };
   return (
-    <div id={t("headers.menu.5")} className="flex mt-28">
+    <div id={t("headers.menu.5")} className="flex pt-28">
       <Space />
       <div className="w-6/8 relative">
         <Title text={t("headers.menu.5")} lineWidth="5/6" />

@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Navbar,
-  NavbarBrand,
   NavbarMenuItem,
   NavbarMenu,
   NavbarContent,
@@ -24,6 +23,10 @@ export default function NavBar() {
     t("headers.menu.5"),
   ];
 
+  const navigateTo = (id) => {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
   return (
     <Navbar
       maxWidth="full"
@@ -38,10 +41,10 @@ export default function NavBar() {
       </NavbarContent>
 
       <NavbarContent justify="start">
-        <NavbarBrand>
+        <div className="flex flex-row items-start">
           <NyAinaLogo />
-          <p className="font-bold text-inherit">NKadmiel</p>
-        </NavbarBrand>
+          <p className="font-semibold text-inherit">admiel</p>
+        </div>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
@@ -50,7 +53,7 @@ export default function NavBar() {
             <Link>
               <nav className="text-primary">#</nav>
               <nav className="text-foreground cursor-pointer">
-                <a href={`#${item}`}>{item}</a>
+                <p onClick={() => navigateTo(item)}>{item}</p>
               </nav>
             </Link>
           </NavbarItem>
@@ -67,7 +70,7 @@ export default function NavBar() {
             <Link className="w-full" href="#" size="lg">
               <nav className="text-primary">#</nav>
               <nav className="text-foreground">
-                <a href={`#${item}`}>{item}</a>
+                <p onClick={() => navigateTo(item)}>{item}</p>
               </nav>
             </Link>
           </NavbarMenuItem>
