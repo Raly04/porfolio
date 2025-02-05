@@ -32,7 +32,7 @@
     "send": "Envoyer"
   },
   "skills": {
-    "code": "// voici tous les services que je peux fournir\n\nconst my_services = {\n  web_frontend_developement: [\"React\", \"HTML & CSS , JS\"],\n  mobile_frontend_developement: [\"Flutter\"],\n  backend_developement: [\"Spring Boot\", \"Express Js\", \"Golang\"],\n  tooling: [\"Golang\"],\n};\n\n/*Je peux aussi créer des applications de bureau avec Java et C#\nEngagez-moi maintenant !!*/",
+    "code": "// voici tous les services que je peux fournir\n\nconst my_services = {\n  web_frontend_developement: [\"React\", \"Angular\", \"Blade\"],\n  mobile_frontend_developement: [\"Flutter\"],\n  backend_developement: [\"Spring Boot\", \"Express Js\", \"Laravel\"],\n  tooling: [\"Golang\"],\n};\n\n/*Je peux aussi créer des applications de bureau avec Java et C#\nEngagez-moi maintenant !!*/",
     "list": {
       "1": "Framework",
       "2": "Outils",

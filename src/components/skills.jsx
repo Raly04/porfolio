@@ -11,10 +11,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 const langs = ["Java C# golang JS", "Dart"];
 const db = ["Mongo DB MySQL", "PostgresSQL", "MariaDB"];
-const frams = ["React Js Express Js", "Spring Boot"];
+const frams = ["React Js Express Js", "Spring Boot Angular" ,"Laravel"];
 const mob = ["Flutter"];
 const tools = ["Vs Code Linux", "Inkscape"];
-const others = ["Github Restful API", "JPA"];
+const others = ["Github Restful API", "JPA Apache Beam"];
 const code = ` // there are all services that i can provide
 
 const my_services = {
