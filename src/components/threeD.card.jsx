@@ -1,4 +1,4 @@
-import Image from "../assets/images/sariko.webp";
+import Image from "../assets/images/sary.jpeg";
 import { CardBody, CardContainer, CardItem } from "../ui/3d-card";
 
 export function ThreeDCardDemo() {
