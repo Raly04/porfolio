@@ -54,13 +54,34 @@
       "image": "Capture.png",
       "technologies": "MERN",
       "title": "Novice immersion",
-      "description": "An application to help new bachelors integrate the world of technologies"
+      "description": "An application to help new bachelor prospects of ENI integrate into the world of technologies, specifically in IT, and also into the vibrant city of Fianarantsoa"
     },
     "3": {
       "image": "image.png",
       "technologies": "React JS Spring Boot MySQL",
       "title": "SMMEC reporting",
-      "description": "A website for reporting",
+      "description": "A website for reporting. This application displays strategic information using charts and tables for the SMMEC company to help leaders make rational decisions",
+      "isSecret": true
+    },
+    "4": {
+      "image": "image.png",
+      "technologies": "React JS Spring Boot Postgres",
+      "title": "Salama Alert",
+      "description": "A platform with a mobile part using React Native to send health emergency alerts that will be received by hospitals with a web application to manage these emergencies and respond in real-time",
+      "isSecret": true
+    },
+    "5": {
+      "image": "image.png",
+      "technologies": "Laravel Blade MySQL",
+      "title": "Digitalisation ACEEM",
+      "description": "Implementation of an orientation module for ACEEM students and candidates. This module will allow students to orient themselves in the various ACEEM fields based on a personality test based on Holland's typology",
+      "isSecret": true
+    },
+    "6": {
+      "image": "image.png",
+      "technologies": "React Ts Spring Boot Postgres Apache Beam",
+      "title": "Ticket Management",
+      "description": "A web application to manage user support tickets. This application is used by multiple users and allows tracking the status of the ticket and saving each status in CSV files",
       "isSecret": true
     }
   },

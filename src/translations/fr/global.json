@@ -54,13 +54,34 @@
       "image": "Capture.png",
       "technologies": "MERN",
       "title": "Immersion novice",
-      "description": "Une application pour aider les nouveaux bacheliers à s'intégrer dans le monde des technologies"
+      "description": "Une application pour aider les nouveaux bacheliers prospects de l'ENI à s'intégrer dans le monde des technologies précision dans l'informatique et aussi dans la vibrante ville qu'est Fianarantsoa"
     },
     "3": {
       "image": "image.png",
       "technologies": "React JS Spring Boot MySQL",
       "title": "Rapports SMMEC",
-      "description": "Un site web pour le reporting",
+      "description": "Un site web pour le reporting.Cette application affiche des informations stratégiques à l'aide des diagrammes et des tableaux de le société SMMEC afin d'aider les dirigeants à prendre des décisions rationnelles",
+      "isSecret": true
+    },
+    "4": {
+      "image": "image.png",
+      "technologies": "React JS Spring Boot Postgres",
+      "title": "Salama Alert",
+      "description": "Une plateforme avec une partie Mobile avec React Native pour envoyer des alertes d'urgences sanitaires qui seront reçus par les hopitaux ayant une application web pour gérer ces urgences et y répondre en temps réel",
+      "isSecret": true
+    },
+    "5": {
+      "image": "image.png",
+      "technologies": "Laravel Blade MySQL",
+      "title": "Digitalisation ACEEM",
+      "description": "Implémentation d'un module d'orientation pour les étudiants et candidats de l'ACEEM. Ce module permettra aux étudiants de s'orienter dans les différentes filières de l'ACEEM à partir d'un test de personnalité basé sur la typologie de Holland",
+      "isSecret": true
+    },
+    "6": {
+      "image": "image.png",
+      "technologies": "React Ts Spring Boot Postgres Apache Beam",
+      "title": "Gestion Ticket",
+      "description": "Une application web pour gérer les tickets de support des utilisateurs.Cette application est utilisée par plusieurs utilisateurs et permet d'effectuer une suivi de l'état du ticket et une sauvegarde pour chaque état dans des fichiers CSV",
       "isSecret": true
     }
   },
