@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function AboutMe() {
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
   const imgRef = useRef(null);
   const textRef = useRef(null);
   const arrowRef = useRef(null);

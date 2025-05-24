@@ -4,63 +4,106 @@ import Space from "./space";
 import Title from "./title";
 import sendIcon from "../assets/send.svg";
 import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
+
+gsap.registerPlugin(ScrollTrigger);
 import emailjs from "@emailjs/browser";
 import loadingIcon from "../assets/loading.svg";
 import successIcon from "../assets/check.png";
 import failedIcon from "../assets/close.png";
 
 function Contacts() {
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
+  const containerRef = useRef(null);
   const imgRef = useRef(null);
   const formRef = useRef(null);
   const arrowRef = useRef(null);
   const [currentIcon, setCurrentIcon] = useState(sendIcon);
 
   useEffect(() => {
-    gsap.fromTo(
-      imgRef.current,
-      { y: 200, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        scrollTrigger: {
-          trigger: imgRef.current,
-          toggleActions: "play reverse play reverse",
-        },
+    // Check if we're on mobile
+    const isMobile = window.innerWidth < 768;
+    
+    // Create a master timeline for better control
+    const masterTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: isMobile ? "top 90%" : "top 75%",
+        end: "bottom 25%",
+        toggleActions: "play none none reverse",
+        once: false,
+        refreshPriority: 1,
       }
-    );
-    gsap.fromTo(
-      formRef.current,
-      { y: 200, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        delay: 0.4,
-        scrollTrigger: {
-          trigger: formRef.current,
-          toggleActions: "play reverse play reverse",
+    });
+
+    // Enhanced animations with mobile optimizations
+    if (imgRef.current) {
+      masterTl.fromTo(
+        imgRef.current,
+        { 
+          y: isMobile ? 30 : 80, 
+          opacity: 0,
+          scale: 0.9
         },
-      }
-    );
-    gsap.fromTo(
-      arrowRef.current,
-      { opacity: 0, scale: 0 },
-      {
-        opacity: 1,
-        duration: 1,
-        scale: 1,
-        delay: 1,
-        ease: "elastic.out(0.4,0.15)",
-        scrollTrigger: {
-          trigger: arrowRef.current,
-          toggleActions: "play reverse play reverse",
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: isMobile ? 0.8 : 1.2,
+          ease: "power3.out",
         },
-      }
-    );
+        0
+      );
+    }
+
+    if (formRef.current) {
+      masterTl.fromTo(
+        formRef.current,
+        { 
+          y: isMobile ? 30 : 80, 
+          opacity: 0,
+          scale: 0.9
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: isMobile ? 0.8 : 1.2,
+          ease: "power3.out",
+        },
+        isMobile ? 0.1 : 0.3
+      );
+    }
+
+    if (arrowRef.current) {
+      masterTl.fromTo(
+        arrowRef.current,
+        { 
+          opacity: 0, 
+          scale: 0,
+          rotation: -45
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          rotation: 0,
+          duration: isMobile ? 0.6 : 1,
+          ease: isMobile ? "power2.out" : "elastic.out(0.6, 0.8)",
+        },
+        isMobile ? 0.2 : 0.6
+      );
+    }
+
+    // Refresh ScrollTrigger on resize
+    const handleResize = () => {
+      ScrollTrigger.refresh();
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   //email config
@@ -86,19 +129,30 @@ function Contacts() {
   return (
     <div id={t("headers.menu.5")} className="flex pt-28">
       <Space />
-      <div className="w-6/8 relative">
+      <div className="w-6/8 relative" ref={containerRef}>
         <Title text={t("headers.menu.5")} lineWidth="5/6" />
         <div className="mt-12 grid xl:grid-cols-2 grid-cols-1 gap-16 w-full">
-          <div
+          <motion.div
             ref={imgRef}
             className="flex flex-col items-start justify-center gap-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
           >
             <div className="text-6xl font-bold">
               <div>{t("body.g_a_p")}</div>
               <div className="text-primary mt-4">{t("body.i_m")} </div>
             </div>
             <div className="flex flex-row items-center justify-start gap-8">
-              <div ref={arrowRef} className="hidden lg:block">
+              <motion.div 
+                ref={arrowRef} 
+                className="hidden lg:block"
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
                 <svg
                   width="147"
                   height="151"
@@ -115,13 +169,23 @@ function Contacts() {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </div>
-              <div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
                 <ContactSvg />
-              </div>
+              </motion.div>
             </div>
-          </div>
-          <div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <form
               ref={formRef}
               onSubmit={sendEmail}
@@ -165,7 +229,7 @@ function Contacts() {
                 />
               </div>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import PropTypes from "prop-types";
 
-export default function Title({ text, lineWidth }) {
+export default function Title({ text = "default", lineWidth = "2/6" }) {
   return (
     <div className="title flex items-center">
       <span className="text-primary">/</span>
@@ -11,11 +11,8 @@ export default function Title({ text, lineWidth }) {
   );
 }
 Title.propTypes = {
-  text: PropTypes.string.isRequired,
-  lineWidth: PropTypes.string.isRequired,
+  text: PropTypes.string,
+  lineWidth: PropTypes.string,
 };
 
-Title.defaultProps = {
-  text: "default",
-  lineWidth: "2/6",
-};
+
