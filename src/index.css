@@ -301,6 +301,44 @@ html {
     }
 }
 
+/* Skills section fallbacks for mobile */
+.skills-services-container {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+.skills-services-container > * {
+    opacity: 1 !important;
+    transform: translateX(0) translateY(0) scale(1) !important;
+    visibility: visible !important;
+}
+
+/* Ensure skill boxes are visible on mobile */
+@media (max-width: 768px) {
+    .skills-services-container {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+    }
+    
+    .skills-services-container > div {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+        display: block !important;
+    }
+    
+    /* Fallback for GSAP failures */
+    [style*="opacity: 0"] {
+        opacity: 1 !important;
+    }
+    
+    [style*="visibility: hidden"] {
+        visibility: visible !important;
+    }
+}
+
 /* Enhanced focus states for accessibility */
 button:focus-visible,
 a:focus-visible,

@@ -60,86 +60,175 @@ export default function Skills() {
   const servicesRef = useRef([]);
 
   useEffect(() => {
-    // Check if we're on mobile
-    const isMobile = window.innerWidth < 768;
+    // Fallback: Ensure content is visible immediately
+    const ensureVisibility = () => {
+      const container = document.querySelector('.skills-services-container');
+      const allElements = [...servicesRef.current, ...skillBoxRefs.current].filter(Boolean);
+      
+      if (container) {
+        container.style.opacity = '1';
+        container.style.visibility = 'visible';
+        container.style.transform = 'none';
+      }
+      
+      allElements.forEach(el => {
+        if (el) {
+          el.style.opacity = '1';
+          el.style.visibility = 'visible';
+          el.style.transform = 'translateX(0) translateY(0) scale(1)';
+        }
+      });
+    };
+
+    // Call immediately
+    ensureVisibility();
     
-    // Create a master timeline for the entire section with mobile-friendly settings
-    const masterTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".skills-services-container",
-        start: isMobile ? "top 90%" : "top 80%",
-        end: "bottom 20%",
-        toggleActions: "play none none reverse",
-        refreshPriority: 1,
-      }
-    });
+    // Call after a short delay as secondary fallback
+    const fallbackTimer = setTimeout(ensureVisibility, 100);
 
-    // Services animation timeline with mobile optimizations
-    const servicesTl = gsap.timeline();
-    servicesRef.current.forEach((ref, index) => {
-      if (ref) {
-        servicesTl.fromTo(ref,
-          { 
-            opacity: 0, 
-            x: isMobile ? 0 : -60, 
-            y: isMobile ? 30 : 0,
-            scale: 0.9,
-            rotationY: isMobile ? 0 : -15
-          },
-          {
-            opacity: 1,
+    try {
+      // Check if device supports proper animations
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isMobile = window.innerWidth < 768;
+      const isLowPerformance = isMobile || prefersReducedMotion;
+
+      // GSAP availability check
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        console.warn('GSAP or ScrollTrigger not available, using fallback visibility');
+        ensureVisibility();
+        return;
+      }
+
+      // Set initial visibility to prevent FOUC (Flash of Unstyled Content)
+      const container = document.querySelector('.skills-services-container');
+      if (container) {
+        container.style.visibility = 'visible';
+        container.style.opacity = '1';
+      }
+
+      // Initialize all elements as visible first (fallback for mobile)
+      const allElements = [...servicesRef.current, ...skillBoxRefs.current].filter(Boolean);
+      
+      if (allElements.length === 0) {
+        console.warn('No elements found for animation, ensuring fallback visibility');
+        setTimeout(ensureVisibility, 200);
+        return;
+      }
+
+      allElements.forEach(el => {
+        if (el) {
+          gsap.set(el, { 
+            opacity: isLowPerformance ? 1 : 0,
             x: 0,
             y: 0,
             scale: 1,
-            rotationY: 0,
-            duration: isMobile ? 0.8 : 1.2,
-            ease: "power3.out",
-          },
-          index * (isMobile ? 0.1 : 0.15)
-        );
+            rotationY: 0
+          });
+        }
+      });
+
+      // Define animation function
+      const animateElements = () => {
+        try {
+          // Animate services
+          servicesRef.current.forEach((ref, index) => {
+            if (ref) {
+              gsap.fromTo(ref,
+                { 
+                  opacity: 0, 
+                  x: -30,
+                  scale: 0.95
+                },
+                {
+                  opacity: 1,
+                  x: 0,
+                  scale: 1,
+                  duration: 0.8,
+                  ease: "power2.out",
+                  delay: index * 0.1,
+                  onComplete: () => {
+                    // Ensure element remains visible after animation
+                    ref.style.opacity = '1';
+                    ref.style.visibility = 'visible';
+                  }
+                }
+              );
+            }
+          });
+
+          // Animate skills with slight delay
+          skillBoxRefs.current.forEach((ref, index) => {
+            if (ref) {
+              gsap.fromTo(ref,
+                { 
+                  opacity: 0, 
+                  x: 30,
+                  scale: 0.95
+                },
+                {
+                  opacity: 1,
+                  x: 0,
+                  scale: 1,
+                  duration: 0.8,
+                  ease: "power2.out",
+                  delay: 0.2 + (index * 0.1),
+                  onComplete: () => {
+                    // Ensure element remains visible after animation
+                    ref.style.opacity = '1';
+                    ref.style.visibility = 'visible';
+                  }
+                }
+              );
+            }
+          });
+        } catch (animationError) {
+          console.warn('Animation error, falling back to visibility:', animationError);
+          ensureVisibility();
+        }
+      };
+
+      // Only run complex animations on desktop or when performance allows
+      if (!isLowPerformance && allElements.length > 0) {
+        // Create ScrollTrigger with better mobile support
+        const scrollTrigger = ScrollTrigger.create({
+          trigger: ".skills-services-container",
+          start: "top 85%",
+          end: "bottom 15%",
+          onEnter: () => animateElements(),
+          onEnterBack: () => animateElements(),
+          once: true, // Only animate once for better performance
+          refreshPriority: -1, // Lower priority to prevent conflicts
+          onRefresh: () => ensureVisibility(), // Ensure visibility on refresh
+        });
+
+        // Cleanup function
+        return () => {
+          if (scrollTrigger) {
+            scrollTrigger.kill();
+          }
+        };
       }
-    });
+    } catch (error) {
+      console.warn('GSAP setup error, using fallback:', error);
+      ensureVisibility();
+    }
 
-    // Skills animation timeline with mobile optimizations
-    const skillsTl = gsap.timeline();
-    skillBoxRefs.current.forEach((ref, index) => {
-      if (ref) {
-        skillsTl.fromTo(ref,
-          { 
-            opacity: 0, 
-            x: isMobile ? 0 : 60, 
-            y: isMobile ? 30 : 0,
-            scale: 0.8,
-            rotationY: isMobile ? 0 : 15
-          },
-          {
-            opacity: 1,
-            x: 0,
-            y: 0,
-            scale: 1,
-            rotationY: 0,
-            duration: isMobile ? 0.6 : 1,
-            ease: isMobile ? "power2.out" : "elastic.out(0.6, 0.8)",
-          },
-          index * (isMobile ? 0.1 : 0.2)
-        );
-      }
-    });
-
-    // Add timelines to master timeline
-    masterTl
-      .add(servicesTl, 0)
-      .add(skillsTl, isMobile ? 0.2 : 0.3);
-
-
-
-    // Refresh ScrollTrigger on resize
+    // Resize handler for responsive updates
     const handleResize = () => {
-      ScrollTrigger.refresh();
+      // Debounce resize events
+      clearTimeout(window.resizeTimeout);
+      window.resizeTimeout = setTimeout(() => {
+        ScrollTrigger.refresh();
+        ensureVisibility(); // Re-ensure visibility on resize
+      }, 150);
     };
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(window.resizeTimeout);
+      clearTimeout(fallbackTimer);
+    };
   }, []);
 
   return (
@@ -149,7 +238,7 @@ export default function Skills() {
         <Title text={t("headers.menu.31")} lineWidth="2/6" />
         
         {/* Combined Skills & Services Section */}
-        <div className="skills-services-container mt-8 md:mt-12 flex xl:flex-row flex-col gap-8 md:gap-16">
+        <div className="skills-services-container mt-8 md:mt-12 flex xl:flex-row flex-col gap-8 md:gap-16" style={{ visibility: 'visible', opacity: 1 }}>
           {/* Services Section - Left */}
           <div className="xl:w-1/2 w-full">
             <div className="mb-8">

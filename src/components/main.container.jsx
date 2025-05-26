@@ -81,15 +81,9 @@ export default function MainContainer() {
           <AboutMe />
         </motion.section>
 
-        <motion.section
-          variants={sectionVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          className="relative py-8 md:py-12"
-        >
+        <section className="relative py-8 md:py-12">
           <Skills />
-        </motion.section>
+        </section>
 
         <motion.section
           variants={sectionVariants}
