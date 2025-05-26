@@ -1,193 +1,240 @@
 import MyButton from "./my.button";
 import downloadIcon from "../assets/download.svg";
-import { ThreeDCardDemo } from "./threeD.card";
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import { motion } from "framer-motion";
+import ProfileImage from "./profile-image";
+import { useRef } from "react";
+import { motion, useInView, useAnimation } from "framer-motion";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import cv from "../assets/cv/CV_MAJ.pdf";
 import Space from "./space";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const arr = "< ";
 const arrClose = "/ >";
 
 export default function Hero() {
   const [t] = useTranslation("global");
-  const [isVisible, setIsVisible] = useState(false);
+
   const imgRef = useRef(null);
   const textRef = useRef(null);
   const arrowRef = useRef(null);
   const containerRef = useRef(null);
-
+  // Use the useInView hook to trigger animations when elements come into view
+  const isInView = useInView(containerRef, { once: true, amount: 0.2 });
+  const controls = useAnimation();
+  
+  // Start animations when the container comes into view
   useEffect(() => {
-    setIsVisible(true);
-    
-    // Master timeline with enhanced animations
-    const masterTl = gsap.timeline({
-      delay: 0.5,
-      onComplete: () => {
-        // Start floating animations after intro
-        gsap.to(arrowRef.current, {
-          y: -10,
-          duration: 2,
-          ease: "power2.inOut",
-          yoyo: true,
-          repeat: -1,
-        });
-      }
+    if (isInView) {
+      controls.start('visible');
+    }
+  }, [isInView, controls]);
+  
+  // Use hardware acceleration for all animations
+  useEffect(() => {
+    // Apply will-change to improve animation performance
+    const elements = document.querySelectorAll('.animate-element');
+    elements.forEach(el => {
+      el.style.willChange = 'transform, opacity';
     });
-
-    // Background elements entrance
-    masterTl.fromTo(".floating-shape", 
-      { 
-        scale: 0, 
-        rotation: -180, 
-        opacity: 0 
-      },
-      { 
-        scale: 1, 
-        rotation: 0, 
-        opacity: 1, 
-        duration: 1.5, 
-        stagger: 0.3,
-        ease: "elastic.out(1, 0.5)" 
-      }
-    );
-
-    // Text content sequence with better staging
-    const textTl = gsap.timeline();
-    textTl.fromTo(
-      textRef.current.children,
-      { 
-        y: 80, 
-        opacity: 0,
-        scale: 0.8,
-        rotationX: 45
-      },
-      {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        rotationX: 0,
-        duration: 1.2,
-        stagger: 0.2,
-        ease: "power4.out",
-      }
-    );
-
-    // Image entrance with 3D effect
-    const imgTl = gsap.timeline();
-    imgTl.fromTo(
-      imgRef.current,
-      { 
-        x: 120, 
-        opacity: 0,
-        scale: 0.7,
-        rotationY: 25,
-        transformPerspective: 1000
-      },
-      {
-        x: 0,
-        opacity: 1,
-        scale: 1,
-        rotationY: 0,
-        duration: 1.5,
-        ease: "power3.out",
-      }
-    );
-
-    // Arrow entrance with bounce
-    const arrowTl = gsap.timeline();
-    arrowTl.fromTo(
-      arrowRef.current,
-      { 
-        opacity: 0, 
-        scale: 0,
-        rotation: 270,
-        transformOrigin: "center center"
-      },
-      {
-        opacity: 1,
-        scale: 1,
-        rotation: 0,
-        duration: 1,
-        ease: "back.out(2)",
-      }
-    );
-
-    // Scroll indicator entrance
-    const scrollTl = gsap.timeline();
-    scrollTl.fromTo(
-      ".scroll-indicator",
-      {
-        y: 50,
-        opacity: 0,
-        scale: 0.8
-      },
-      {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 1,
-        ease: "power2.out"
-      }
-    );
-
-    // Combine all timelines
-    masterTl
-      .add(textTl, 0.3)
-      .add(imgTl, 0.8)
-      .add(arrowTl, 1.2)
-      .add(scrollTl, 1.8);
-
+    
+    // Cleanup function
+    return () => {
+      elements.forEach(el => {
+        el.style.willChange = 'auto';
+      });
+    };
   }, []);
+
+  // Animation variants for different elements
+  const floatingShapeVariants = {
+    hidden: { 
+      scale: 0, 
+      rotate: -180, 
+      opacity: 0 
+    },
+    visible: (i) => ({
+      scale: 1,
+      rotate: 0,
+      opacity: 1,
+      transition: {
+        duration: 1.2,
+        delay: i * 0.15,
+        ease: [0.34, 1.25, 0.64, 1], // Reduced elasticity for smoother motion
+        type: "spring",
+        stiffness: 120,
+        damping: 20
+      }
+    })
+  };
+
+  const textVariants = {
+    hidden: { 
+      y: 50, 
+      opacity: 0,
+      scale: 0.95,
+      rotateX: 20 // Reduced rotation for smoother animation
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      rotateX: 0,
+      transition: {
+        duration: 0.8, // Reduced duration for snappier response
+        staggerChildren: 0.1, // Faster staggering
+        ease: [0.25, 0.8, 0.25, 1], // Smoother easing
+        when: "beforeChildren" // Ensure parent animates before children
+      }
+    }
+  };
+
+  const imageVariants = {
+    hidden: { 
+      x: 80, // Reduced distance
+      opacity: 0,
+      scale: 0.85, // Less scaling for smoother transition
+      rotateY: 15, // Less rotation
+      perspective: 1000
+    },
+    visible: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      rotateY: 0,
+      transition: {
+        type: "spring", // Spring physics for smoother motion
+        stiffness: 100,
+        damping: 15,
+        mass: 1,
+        delay: 0.4, // Reduced delay
+      }
+    }
+  };
+
+  const arrowVariants = {
+    hidden: { 
+      opacity: 0, 
+      scale: 0.5, // Start from a larger scale for smoother animation
+      rotate: 180, // Reduced rotation
+      originX: 0.5,
+      originY: 0.5
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      rotate: 0,
+      transition: {
+        duration: 0.7, // Faster animation
+        delay: 0.8, // Reduced delay
+        ease: "backOut" // Using named ease for better performance
+      }
+    },
+    floating: {
+      y: [-6, 0, -6], // Reduced movement range
+      transition: {
+        duration: 2.5, // Faster cycle
+        repeat: Infinity,
+        repeatType: "mirror", // Smoother looping
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const scrollIndicatorVariants = {
+    hidden: {
+      y: 30, // Reduced distance
+      opacity: 0,
+      scale: 0.9 // Less scaling
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.6, // Faster animation
+        delay: 1.2, // Reduced delay
+        ease: "easeOut" // Simpler easing function
+      }
+    }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.6,
-        staggerChildren: 0.2,
+        duration: 0.4, // Faster fade-in
+        staggerChildren: 0.1, // Faster staggering
+        delayChildren: 0.1, // Slight delay before starting children animations
+        ease: "linear" // Simple easing for opacity
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 15, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.6,
-        ease: "easeOut",
+        type: "spring", // Spring physics for smoother motion
+        stiffness: 260,
+        damping: 20,
+        duration: 0.4,
       },
     },
   };
 
   return (
-    <div id={t("headers.menu.1")} className="flex pt-28">
+    <div id={t("headers.menu.1")} className="flex pt-28 md:pt-8 overflow-hidden">
       <Space />
       <motion.div
         ref={containerRef}
         className="w-6/8 relative min-h-screen flex items-center justify-center overflow-hidden"
         variants={containerVariants}
         initial="hidden"
-        animate={isVisible ? "visible" : "hidden"}
+        animate={controls}
       >
         {/* Animated background gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-background/50" />
         
         {/* Floating geometric shapes */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="floating-shape absolute top-20 left-20 w-20 h-20 border border-primary/20 rounded-full" />
-          <div className="floating-shape absolute top-40 right-20 w-16 h-16 bg-primary/10 rounded-lg" />
-          <div className="floating-shape absolute bottom-40 left-40 w-12 h-12 border-2 border-primary/30 rotate-45" />
-          <div className="floating-shape absolute top-60 right-40 w-8 h-8 bg-primary/15 rounded" />
-          <div className="floating-shape absolute bottom-20 right-60 w-6 h-6 border border-primary/25 rounded-full" />
+          <motion.div 
+            className="absolute top-20 left-20 w-20 h-20 border border-primary/20 rounded-full animate-element" 
+            variants={floatingShapeVariants}
+            custom={0}
+            initial="hidden"
+            animate="visible"
+          />
+          <motion.div 
+            className="absolute top-40 right-20 w-16 h-16 bg-primary/10 rounded-lg animate-element" 
+            variants={floatingShapeVariants}
+            custom={1}
+            initial="hidden"
+            animate="visible"
+          />
+          <motion.div 
+            className="absolute bottom-40 left-40 w-12 h-12 border-2 border-primary/30 rotate-45 animate-element" 
+            variants={floatingShapeVariants}
+            custom={2}
+            initial="hidden"
+            animate="visible"
+          />
+          <motion.div 
+            className="absolute top-60 right-40 w-8 h-8 bg-primary/15 rounded animate-element" 
+            variants={floatingShapeVariants}
+            custom={3}
+            initial="hidden"
+            animate="visible"
+          />
+          <motion.div 
+            className="absolute bottom-20 right-60 w-6 h-6 border border-primary/25 rounded-full animate-element" 
+            variants={floatingShapeVariants}
+            custom={4}
+            initial="hidden"
+            animate="visible"
+          />
         </div>
 
         <div className="w-full relative z-10">
@@ -197,9 +244,12 @@ export default function Hero() {
             className="flex flex-row items-center justify-center gap-8"
             variants={itemVariants}
           >
-            <div
+            <motion.div
               ref={textRef}
               className="w-full flex-col flex items-start justify-center space-y-6"
+              variants={textVariants}
+              initial="hidden"
+              animate="visible"
             >
               <motion.div 
                 className="text-sm font-medium text-primary/80 tracking-wider uppercase"
@@ -209,7 +259,7 @@ export default function Hero() {
               </motion.div>
               
               <motion.div 
-                className="font-bold text-5xl md:text-7xl xl:text-8xl leading-tight"
+                className="font-bold text-5xl xl:text-6xl leading-tight"
                 variants={itemVariants}
               >
                 <div className="overflow-hidden">
@@ -219,7 +269,7 @@ export default function Hero() {
                     animate={{ y: 0 }}
                     transition={{ delay: 0.3, duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
                   >
-                    {t("info.fname1")}
+                    {t("info.fname1")} {t("info.fname2")}
                   </motion.span>
                 </div>
                 <div className="overflow-hidden">
@@ -229,7 +279,7 @@ export default function Hero() {
                     animate={{ y: 0 }}
                     transition={{ delay: 0.5, duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
                   >
-                    {t("info.fname2")} {t("info.lname")}
+                    {t("info.lname")}
                   </motion.span>
                 </div>
               </motion.div>
@@ -282,13 +332,15 @@ export default function Hero() {
                   />
                 </motion.a>
               </motion.div>
-            </div>
+            </motion.div>
             
             {/* Decorative Arrow */}
             <motion.div 
               className="hidden xl:block"
               ref={arrowRef}
-              variants={itemVariants}
+              variants={arrowVariants}
+              initial="hidden"
+              animate={["visible", "floating"]}
               whileHover={{ scale: 1.1, rotate: 5 }}
             >
               {item}
@@ -299,20 +351,22 @@ export default function Hero() {
           <motion.div
             className="w-full flex flex-row items-center xl:justify-end justify-center"
             ref={imgRef}
-            variants={itemVariants}
+            variants={imageVariants}
+            initial="hidden"
+            animate="visible"
           >
-            <motion.div
-              whileHover={{ scale: 1.02, rotateY: 5 }}
-              transition={{ duration: 0.3 }}
-            >
-              <ThreeDCardDemo />
-            </motion.div>
+            <ProfileImage />
           </motion.div>
         </div>
       </div>
 
       {/* Scroll Down Indicator */}
-      <div className="scroll-indicator absolute bottom-8 left-1/2 transform -translate-x-1/2 flex-col items-center hidden md:flex">
+      <motion.div 
+        className="scroll-indicator absolute bottom-8 left-1/2 transform -translate-x-1/2 flex-col items-center hidden md:flex"
+        variants={scrollIndicatorVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <p className="text-sm text-primary/70 mb-2 font-medium tracking-wider animate-pulse">
           SCROLL
         </p>
@@ -326,7 +380,7 @@ export default function Hero() {
         >
           <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
         </svg>
-      </div>
+      </motion.div>
     </motion.div>
   </div>
   );

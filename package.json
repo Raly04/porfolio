@@ -16,7 +16,6 @@
     "axios": "^1.7.2",
     "clsx": "^2.1.1",
     "framer-motion": "^11.2.6",
-    "gsap": "^3.12.5",
     "i18next": "^23.11.5",
     "portfolio": "file:",
     "postcss": "^8.4.38",

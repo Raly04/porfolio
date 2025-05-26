@@ -60,7 +60,7 @@ export default function MainContainer() {
       <SocialMedia />
       
       {/* Main content with improved transitions */}
-      <div className="bg-background min-h-screen overflow-x-hidden">
+      <div className="bg-background min-h-screen overflow-hidden">
         {/* Sections with scroll-triggered animations */}
         <motion.section
           variants={sectionVariants}

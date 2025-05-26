@@ -3,13 +3,9 @@ import MyButton from "./my.button";
 import Space from "./space";
 import Title from "./title";
 import sendIcon from "../assets/send.svg";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
-
-gsap.registerPlugin(ScrollTrigger);
+import { motion, useInView } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import loadingIcon from "../assets/loading.svg";
 import successIcon from "../assets/check.png";
@@ -18,93 +14,76 @@ import failedIcon from "../assets/close.png";
 function Contacts() {
   const [t] = useTranslation("global");
   const containerRef = useRef(null);
-  const imgRef = useRef(null);
   const formRef = useRef(null);
-  const arrowRef = useRef(null);
   const [currentIcon, setCurrentIcon] = useState(sendIcon);
-
-  useEffect(() => {
-    // Check if we're on mobile
-    const isMobile = window.innerWidth < 768;
-    
-    // Create a master timeline for better control
-    const masterTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: isMobile ? "top 90%" : "top 75%",
-        end: "bottom 25%",
-        toggleActions: "play none none reverse",
-        once: false,
-        refreshPriority: 1,
+  const isInView = useInView(containerRef, { once: false, amount: 0.3 });
+  
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        duration: 0.5
       }
-    });
-
-    // Enhanced animations with mobile optimizations
-    if (imgRef.current) {
-      masterTl.fromTo(
-        imgRef.current,
-        { 
-          y: isMobile ? 30 : 80, 
-          opacity: 0,
-          scale: 0.9
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: isMobile ? 0.8 : 1.2,
-          ease: "power3.out",
-        },
-        0
-      );
     }
-
-    if (formRef.current) {
-      masterTl.fromTo(
-        formRef.current,
-        { 
-          y: isMobile ? 30 : 80, 
-          opacity: 0,
-          scale: 0.9
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: isMobile ? 0.8 : 1.2,
-          ease: "power3.out",
-        },
-        isMobile ? 0.1 : 0.3
-      );
+  };
+  
+  const imgVariants = {
+    hidden: { 
+      y: window.innerWidth < 768 ? 30 : 80, 
+      opacity: 0,
+      scale: 0.9
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: window.innerWidth < 768 ? 0.8 : 1.2,
+        ease: [0.215, 0.61, 0.355, 1] // power3.out equivalent
+      }
     }
-
-    if (arrowRef.current) {
-      masterTl.fromTo(
-        arrowRef.current,
-        { 
-          opacity: 0, 
-          scale: 0,
-          rotation: -45
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          rotation: 0,
-          duration: isMobile ? 0.6 : 1,
-          ease: isMobile ? "power2.out" : "elastic.out(0.6, 0.8)",
-        },
-        isMobile ? 0.2 : 0.6
-      );
+  };
+  
+  const formVariants = {
+    hidden: { 
+      y: window.innerWidth < 768 ? 30 : 80, 
+      opacity: 0,
+      scale: 0.9
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: window.innerWidth < 768 ? 0.8 : 1.2,
+        delay: window.innerWidth < 768 ? 0.1 : 0.3,
+        ease: [0.215, 0.61, 0.355, 1] // power3.out equivalent
+      }
     }
-
-    // Refresh ScrollTrigger on resize
-    const handleResize = () => {
-      ScrollTrigger.refresh();
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  };
+  
+  const arrowVariants = {
+    hidden: { 
+      opacity: 0, 
+      scale: 0,
+      rotate: -45
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      rotate: 0,
+      transition: {
+        duration: window.innerWidth < 768 ? 0.6 : 1,
+        delay: window.innerWidth < 768 ? 0.2 : 0.6,
+        ease: window.innerWidth < 768 ? 
+          [0.25, 0.46, 0.45, 0.94] : // power2.out equivalent
+          [0.34, 1.56, 0.64, 1] // elastic.out equivalent
+      }
+    }
+  };
 
   //email config
 
@@ -129,16 +108,60 @@ function Contacts() {
   return (
     <div id={t("headers.menu.5")} className="flex pt-28">
       <Space />
-      <div className="w-6/8 relative" ref={containerRef}>
+      <motion.div 
+        ref={containerRef}
+        className="w-6/8 relative"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
+        {/* Animated decorative elements */}
+        <motion.div 
+          className="absolute -left-10 top-20 w-7 h-7 border-2 border-primary/20 rounded-full"
+          animate={{
+            x: [0, 12, 0],
+            y: [0, -8, 0],
+            rotate: [0, 180, 360],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div 
+          className="absolute right-1/4 -top-6 w-5 h-5 bg-primary/10 rounded-md rotate-45"
+          animate={{
+            y: [0, 15, 0],
+            rotate: [45, 90, 45],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
+        <motion.div 
+          className="absolute right-10 top-40 w-4 h-4 border border-primary/30 rounded-full"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        />
         <Title text={t("headers.menu.5")} lineWidth="5/6" />
         <div className="mt-12 grid xl:grid-cols-2 grid-cols-1 gap-16 w-full">
           <motion.div
-            ref={imgRef}
             className="flex flex-col items-start justify-center gap-8"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
+            variants={imgVariants}
           >
             <div className="text-6xl font-bold">
               <div>{t("body.g_a_p")}</div>
@@ -146,12 +169,8 @@ function Contacts() {
             </div>
             <div className="flex flex-row items-center justify-start gap-8">
               <motion.div 
-                ref={arrowRef} 
                 className="hidden lg:block"
-                initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3 }}
+                variants={arrowVariants}
               >
                 <svg
                   width="147"
@@ -181,10 +200,7 @@ function Contacts() {
             </div>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            variants={formVariants}
           >
             <form
               ref={formRef}
@@ -231,7 +247,7 @@ function Contacts() {
             </form>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

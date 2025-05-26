@@ -48,7 +48,8 @@
       "image": "portfolio.png",
       "technologies": "React Js Tailwind Css",
       "title": "Portfolio",
-      "description": "Mon portfolio personnel"
+      "description": "Mon portfolio personnel",
+      "isSecret": true
     },
     "2": {
       "image": "Capture.png",

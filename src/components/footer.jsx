@@ -15,8 +15,10 @@ function Footer() {
           <div className=" flex xl:flex-row flex-col items-center justify-between w-full">
             <div className="flex flex-col items-center gap-1">
               <div className="flex md:flex-row flex-col items-start">
-                <NyAinaLogo />
-                <p className="font-bold text-inherit">{t("info.logo_name")}</p>
+                <div className="flex items-start justify-center">
+                  <NyAinaLogo />
+                  <p className="font-bold text-inherit">{t("info.logo_name")}</p>
+                </div>
                 <p className="text-secondary md:ml-4">{t("info.mail")}</p>
               </div>
               <div className="">{t("info.job")}</div>
