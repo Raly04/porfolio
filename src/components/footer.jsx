@@ -5,6 +5,7 @@ import Title from "./title";
 import SocialMediaFooter from "./social.media.footer";
 
 function Footer() {
+  // eslint-disable-next-line no-unused-vars
   const [t, i18n] = useTranslation("global");
   return (
     <div className="flex mt-28 pb-8">

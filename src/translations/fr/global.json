@@ -46,9 +46,9 @@
   "works": {
     "1": {
       "image": "portfolio.png",
-      "technologies": "React Js Tailwind Css",
+      "technologies": "React-JS Tailwind-Css",
       "title": "Portfolio",
-      "description": "Mon portfolio personnel",
+      "description": "Mon portfolio personnel. Vous pouvez trouver tous mes projets ici et aussi me contacter",
       "isSecret": true
     },
     "2": {
@@ -59,14 +59,14 @@
     },
     "3": {
       "image": "image.png",
-      "technologies": "React JS Spring Boot MySQL",
+      "technologies": "React-JS Spring-Boot MySQL",
       "title": "Rapports SMMEC",
       "description": "Un site web pour le reporting.Cette application affiche des informations stratégiques à l'aide des diagrammes et des tableaux de le société SMMEC afin d'aider les dirigeants à prendre des décisions rationnelles",
       "isSecret": true
     },
     "4": {
       "image": "image.png",
-      "technologies": "React JS Spring Boot Postgres",
+      "technologies": "React-JS Spring-Boot Postgres",
       "title": "Salama Alert",
       "description": "Une plateforme avec une partie Mobile avec React Native pour envoyer des alertes d'urgences sanitaires qui seront reçus par les hopitaux ayant une application web pour gérer ces urgences et y répondre en temps réel",
       "isSecret": true
@@ -80,9 +80,9 @@
     },
     "6": {
       "image": "image.png",
-      "technologies": "React Ts Spring Boot Postgres Apache Beam",
-      "title": "Gestion Ticket",
-      "description": "Une application web pour gérer les tickets de support des utilisateurs.Cette application est utilisée par plusieurs utilisateurs et permet d'effectuer une suivi de l'état du ticket et une sauvegarde pour chaque état dans des fichiers CSV",
+      "technologies": "React-JS Hono-JS Bun MySQL",
+      "title": "The End Page",
+      "description": "Une application web pour aider les gens à quitter une partie de leur vie (amour, travail, famille) et créer une page de souvenir des bonnes années",
       "isSecret": true
     }
   },

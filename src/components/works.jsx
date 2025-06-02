@@ -8,6 +8,7 @@ import smmec from "../assets/images/smmec.png";
 import sal from "../assets/images/sal.png";
 import aceem from "../assets/images/aceem.png";
 import port from "../assets/images/portfolio.png";
+import theend from "../assets/images/theend.png";
 import { useTranslation } from "react-i18next";
 
 export default function Works() {
@@ -130,6 +131,16 @@ export default function Works() {
       description: t("works.5.description"),
       isSecret: true,
       category: "internship",
+    },
+    {
+      image: theend,
+      technologies: t("works.6.technologies"),
+      title: t("works.6.title"),
+      description: t("works.6.description"),
+      isSecret: false,
+      link:"https://infinity.madagascar.webcup.hodi.host",
+      featured: true,
+      category: "competitions",
     },
   ];
 

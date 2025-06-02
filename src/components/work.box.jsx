@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import MyButton from "./my.button";
 import openIcon from "../assets/component.svg";
 import secretIcon from "../assets/lock.svg";

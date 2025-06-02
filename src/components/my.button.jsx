@@ -98,7 +98,7 @@ export default function MyButton({
           <motion.img
             src={img}
             alt=""
-            className="w-4 h-4"
+            className={`w-4 h-4 text-${textColor} fill-current`}
             variants={iconVariants}
           />
         )}
@@ -125,4 +125,3 @@ MyButton.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
 };
-

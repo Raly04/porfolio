@@ -46,9 +46,9 @@
   "works": {
     "1": {
       "image": "portfolio.png",
-      "technologies": "React Js Tailwind Css",
+      "technologies": "React-JS Tailwind-CSS",
       "title": "Portfolio",
-      "description": "My personal portfolio",
+      "description": "My personal porfolio . You can find all my projects here and also contact me",
       "isSecret": true
     },
     "2": {
@@ -59,14 +59,14 @@
     },
     "3": {
       "image": "image.png",
-      "technologies": "React JS Spring Boot MySQL",
+      "technologies": "React-JS Spring-Boot MySQL",
       "title": "SMMEC reporting",
       "description": "A website for reporting. This application displays strategic information using charts and tables for the SMMEC company to help leaders make rational decisions",
       "isSecret": true
     },
     "4": {
       "image": "image.png",
-      "technologies": "React JS Spring Boot Postgres",
+      "technologies": "React-JS Spring-Boot Postgres",
       "title": "Salama Alert",
       "description": "A platform with a mobile part using React Native to send health emergency alerts that will be received by hospitals with a web application to manage these emergencies and respond in real-time",
       "isSecret": true
@@ -80,9 +80,9 @@
     },
     "6": {
       "image": "image.png",
-      "technologies": "React Ts Spring Boot Postgres Apache Beam",
-      "title": "Ticket Management",
-      "description": "A web application to manage user support tickets. This application is used by multiple users and allows tracking the status of the ticket and saving each status in CSV files",
+      "technologies": "React-JS Hono-JS Bun MySQL",
+      "title": "The End Page",
+      "description": "A website to help people leaving a part of his life (love , job , family) and to create a page memory of the good times",
       "isSecret": true
     }
   },
