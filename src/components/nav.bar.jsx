@@ -14,7 +14,7 @@ import SelectLang from "./select.lang";
 import { useTranslation } from "react-i18next";
 
 export default function NavBar() {
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");

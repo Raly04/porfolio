@@ -6,7 +6,7 @@ import Space from "./space";
 import Title from "./title";
 import { useTranslation } from "react-i18next";
 
-const langs = ["Java", "C#", "JavaScript", "Golang", "Dart", "Python"];
+const langs = ["Java", "C#", "JavaScript", "Golang", "Dart", "Python", "PHP"];
 const db = ["MongoDB", "MySQL", "PostgreSQL", "MariaDB", "Redis"];
 const frams = [
   "React.js",
@@ -15,9 +15,10 @@ const frams = [
   "Angular",
   "Laravel",
   "Flutter",
+  "WordPress",
 ];
 const tools = ["VS Code", "Linux", "Docker", "Git", "Inkscape", "Figma"];
-const others = ["GitHub", "REST API", "JPA", "Apache Beam", "GraphQL"];
+const others = ["GitHub", "REST API", "JPA", "Apache Beam", "GraphQL", "Dify"];
 
 // Services data
 const services = [
@@ -62,20 +63,20 @@ export default function Skills() {
     if (isInView) {
       controls.start('visible');
     }
-    
+
     // Apply will-change for better performance
     const elements = document.querySelectorAll('.skill-animate');
     elements.forEach(el => {
       el.style.willChange = 'transform, opacity';
     });
-    
+
     return () => {
       elements.forEach(el => {
         el.style.willChange = 'auto';
       });
     };
   }, [isInView, controls]);
-  
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -89,10 +90,10 @@ export default function Skills() {
       }
     }
   };
-  
+
   const serviceVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       x: -20, // Reduced distance for smoother animation
       scale: 0.97 // Less scaling for smoother transition
     },
@@ -109,10 +110,10 @@ export default function Skills() {
       }
     })
   };
-  
+
   const skillVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       x: 20, // Reduced distance
       scale: 0.97 // Less scaling for smoother transition
     },
@@ -135,9 +136,9 @@ export default function Skills() {
       <Space />
       <div className="w-6/8 relative">
         <Title text={t("headers.menu.31")} lineWidth="2/6" />
-        
+
         {/* Combined Skills & Services Section */}
-        <motion.div 
+        <motion.div
           ref={containerRef}
           className="skills-services-container mt-8 md:mt-12 flex xl:flex-row flex-col gap-8 md:gap-16"
           variants={containerVariants}
@@ -147,7 +148,7 @@ export default function Skills() {
           {/* Services Section - Left */}
           <div className="xl:w-1/2 w-full relative">
             {/* Animated decorative elements */}
-            <motion.div 
+            <motion.div
               className="absolute -left-8 top-12 w-6 h-6 border-2 border-primary/20 rounded-full skill-animate"
               animate={{
                 x: [0, 10, 0],
@@ -161,7 +162,7 @@ export default function Skills() {
                 ease: "easeInOut",
               }}
             />
-            <motion.div 
+            <motion.div
               className="absolute right-1/4 -top-4 w-4 h-4 bg-primary/10 rotate-45 skill-animate"
               animate={{
                 y: [0, 15, 0],
@@ -177,7 +178,7 @@ export default function Skills() {
             />
             <div className="mb-8">
               <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center">
-                <motion.span 
+                <motion.span
                   className="text-primary mr-2"
                   animate={{
                     scale: [1, 1.2, 1],
@@ -248,7 +249,7 @@ export default function Skills() {
           {/* Skills Section - Right */}
           <div className="xl:w-1/2 w-full relative">
             {/* Animated decorative elements */}
-            <motion.div 
+            <motion.div
               className="absolute -right-6 top-20 w-5 h-5 border border-primary/30 rounded-full skill-animate"
               animate={{
                 x: [0, -8, 0],
@@ -262,7 +263,7 @@ export default function Skills() {
                 delay: 2,
               }}
             />
-            <motion.div 
+            <motion.div
               className="absolute left-1/3 -top-6 w-3 h-3 bg-primary/15 rounded-sm skill-animate"
               animate={{
                 y: [0, 10, 0],
@@ -277,7 +278,7 @@ export default function Skills() {
             />
             <div className="mb-8">
               <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center">
-                <motion.span 
+                <motion.span
                   className="text-primary mr-2"
                   animate={{
                     scale: [1, 1.2, 1],
@@ -308,7 +309,7 @@ export default function Skills() {
                 <SkillBox group={t("skills.list.2")} elements={tools} />
               </motion.div>
               <motion.div
-                variants={skillVariants} 
+                variants={skillVariants}
                 custom={4}
                 className="lg:col-span-2 skill-animate"
               >

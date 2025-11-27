@@ -84,6 +84,13 @@
       "title": "The End Page",
       "description": "Une application web pour aider les gens à quitter une partie de leur vie (amour, travail, famille) et créer une page de souvenir des bonnes années",
       "isSecret": true
+    },
+    "7": {
+      "image": "ls.png",
+      "technologies": "Wordpress Dify PHP",
+      "title": "Limitless",
+      "description": "Limitless est une application web tout-en-un dédiée à l’achat, l’hébergement et la vente de formations 100 % en ligne. Elle a été conçue pour accompagner les créateurs, formateurs, à diffuser leurs connaissances, développer leur impact, et générer des revenus ; sans complexité technique.",
+      "isSecret": false
     }
   },
   "form": {

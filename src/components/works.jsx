@@ -9,6 +9,7 @@ import sal from "../assets/images/sal.png";
 import aceem from "../assets/images/aceem.png";
 import port from "../assets/images/portfolio.png";
 import theend from "../assets/images/theend.png";
+import ls from "../assets/images/ls.png";
 import { useTranslation } from "react-i18next";
 
 export default function Works() {
@@ -32,18 +33,18 @@ export default function Works() {
 
     handleResize();
     window.addEventListener("resize", handleResize);
-    
+
     // Start animations when in view
     if (isInView) {
       controls.start('visible');
     }
-    
+
     // Apply will-change for better performance
     const elements = document.querySelectorAll('.work-animate');
     elements.forEach(el => {
       el.style.willChange = 'transform, opacity';
     });
-    
+
     return () => {
       window.removeEventListener("resize", handleResize);
       elements.forEach(el => {
@@ -51,7 +52,7 @@ export default function Works() {
       });
     };
   }, [isInView, controls]);
-  
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -65,7 +66,7 @@ export default function Works() {
       }
     }
   };
-  
+
   const itemVariants = {
     hidden: () => ({
       opacity: 0,
@@ -138,9 +139,18 @@ export default function Works() {
       title: t("works.6.title"),
       description: t("works.6.description"),
       isSecret: false,
-      link:"https://infinity.madagascar.webcup.hodi.host",
+      link: "https://infinity.madagascar.webcup.hodi.host",
       featured: true,
       category: "competitions",
+    },
+    {
+      image: ls,
+      technologies: t("works.7.technologies"),
+      title: t("works.7.title"),
+      description: t("works.7.description"),
+      link: "https://ls.netlink-digital.com/limitless",
+      isSecret: false,
+      category: "internship",
     },
   ];
 
@@ -169,7 +179,7 @@ export default function Works() {
       <Space />
       <div className="w-6/8 relative">
         {/* Animated decorative elements */}
-        <motion.div 
+        <motion.div
           className="absolute -left-10 top-20 w-8 h-8 border-2 border-primary/20 rounded-full work-animate"
           animate={{
             x: [0, 15, 0],
@@ -183,7 +193,7 @@ export default function Works() {
             ease: "easeInOut",
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute right-1/4 -top-6 w-5 h-5 bg-primary/10 rounded-md rotate-45 work-animate"
           animate={{
             y: [0, 20, 0],
@@ -197,7 +207,7 @@ export default function Works() {
             delay: 1,
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute right-10 top-40 w-4 h-4 border border-primary/30 rounded-full work-animate"
           animate={{
             scale: [1, 1.3, 1],
@@ -214,7 +224,7 @@ export default function Works() {
 
         {/* Filter buttons */}
         <div className="relative mt-8 mb-12">
-          <motion.div 
+          <motion.div
             className="absolute -left-6 -bottom-6 w-3 h-3 bg-primary/15 rounded-sm work-animate"
             animate={{
               x: [0, 8, 0],
@@ -245,11 +255,10 @@ export default function Works() {
               <motion.button
                 key={filter.key}
                 onClick={() => setActiveFilter(filter.key)}
-                className={`px-6 py-2 rounded-full border transition-all duration-300 ${
-                  activeFilter === filter.key
+                className={`px-6 py-2 rounded-full border transition-all duration-300 ${activeFilter === filter.key
                     ? "bg-primary text-background border-primary"
                     : "bg-background text-foreground border-secondary hover:bg-primary/10 hover:text-primary hover:border-primary/30"
-                }`}
+                  }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -260,7 +269,7 @@ export default function Works() {
         </div>
 
         {/* Masonry Layout */}
-        <motion.div 
+        <motion.div
           ref={containerRef}
           className="projects-container mt-12 flex gap-6 w-full"
           variants={containerVariants}
