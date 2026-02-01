@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import cv from "../assets/cv/CV_MAJ.pdf";
+import cv from "../assets/cv/CV_RALY_ANDRY.pdf";
 import Space from "./space";
 
 const arr = "< ";
