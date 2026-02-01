@@ -11,14 +11,16 @@ import port from "../assets/images/portfolio.png";
 import theend from "../assets/images/theend.png";
 import ls from "../assets/images/ls.png";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 export default function Works() {
   const [t] = useTranslation("global");
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [columns, setColumns] = useState(3);
   const [activeFilter, setActiveFilter] = useState("all");
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
   const controls = useAnimation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,13 +44,17 @@ export default function Works() {
     // Apply will-change for better performance
     const elements = document.querySelectorAll('.work-animate');
     elements.forEach(el => {
-      el.style.willChange = 'transform, opacity';
+      if (el instanceof HTMLElement) {
+        el.style.willChange = 'transform, opacity';
+      }
     });
 
     return () => {
       window.removeEventListener("resize", handleResize);
       elements.forEach(el => {
-        el.style.willChange = 'auto';
+        if (el instanceof HTMLElement) {
+          el.style.willChange = 'auto';
+        }
       });
     };
   }, [isInView, controls]);
@@ -74,7 +80,7 @@ export default function Works() {
       scale: window.innerWidth < 768 ? 0.97 : 0.9, // Less scaling for smoother transition
       rotateY: window.innerWidth < 768 ? 0 : 8, // Reduced rotation
     }),
-    visible: (index) => ({
+    visible: (index: number) => ({
       opacity: 1,
       y: 0,
       scale: 1,
@@ -160,11 +166,14 @@ export default function Works() {
     return project.category === activeFilter;
   });
 
+  const displayedProjects = filteredProjects.slice(0, 3);
+  const remainingCount = Math.max(0, filteredProjects.length - 3);
+
   // Create masonry columns
   const createMasonryColumns = () => {
-    const columnArrays = Array.from({ length: columns }, () => []);
+    const columnArrays = Array.from({ length: columns }, () => [] as typeof workBoxes);
 
-    filteredProjects.forEach((box, index) => {
+    displayedProjects.forEach((box, index) => {
       const columnIndex = index % columns;
       columnArrays[columnIndex].push({ ...box, originalIndex: index });
     });
@@ -256,8 +265,8 @@ export default function Works() {
                 key={filter.key}
                 onClick={() => setActiveFilter(filter.key)}
                 className={`px-6 py-2 rounded-full border transition-all duration-300 ${activeFilter === filter.key
-                    ? "bg-primary text-background border-primary"
-                    : "bg-background text-foreground border-secondary hover:bg-primary/10 hover:text-primary hover:border-primary/30"
+                  ? "bg-primary text-background border-primary"
+                  : "bg-background text-foreground border-secondary hover:bg-primary/10 hover:text-primary hover:border-primary/30"
                   }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -310,6 +319,7 @@ export default function Works() {
           transition={{ duration: 0.6, delay: 0.5 }}
         >
           <motion.button
+            onClick={() => navigate("/all-projects")}
             className="px-8 py-3 bg-primary/10 text-primary border border-primary/30 rounded-lg hover:bg-primary hover:text-background transition-all duration-300 font-medium work-animate"
             whileHover={{
               scale: 1.05,
@@ -317,7 +327,7 @@ export default function Works() {
             }}
             whileTap={{ scale: 0.95 }}
           >
-            Load More Projects
+            {t("btn.more_projects", { count: remainingCount > 0 ? remainingCount : "" }).replace("()", "")}
           </motion.button>
         </motion.div>
       </div>

@@ -1,7 +1,17 @@
-import PropTypes from "prop-types";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import { useState } from "react";
+
+interface MyButtonProps {
+  img?: string;
+  borderColor?: string;
+  textColor?: string;
+  bg?: string;
+  text: string;
+  action?: () => void;
+  className?: string;
+  disabled?: boolean;
+}
 
 export default function MyButton({
   img,
@@ -9,10 +19,10 @@ export default function MyButton({
   textColor = "foreground",
   bg = "background",
   text,
-  action = () => {},
+  action = () => { },
   className = "",
   disabled = false,
-}) {
+}: MyButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   const buttonVariants = {
@@ -93,7 +103,7 @@ export default function MyButton({
         >
           {text}
         </motion.span>
-        
+
         {img && (
           <motion.img
             src={img}
@@ -115,13 +125,3 @@ export default function MyButton({
   );
 }
 
-MyButton.propTypes = {
-  img: PropTypes.string,
-  textColor: PropTypes.string,
-  borderColor: PropTypes.string,
-  bg: PropTypes.string,
-  text: PropTypes.string.isRequired,
-  action: PropTypes.func,
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-};

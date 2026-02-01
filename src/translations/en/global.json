@@ -1,12 +1,12 @@
 {
   "headers": {
     "menu": {
-      "1": "home",
-      "2": "about-me",
-      "3": "skills",
-      "31": "skills & services",
-      "4": "works",
-      "5": "contacts"
+      "1": "Home",
+      "2": "About-me",
+      "3": "Services",
+      "31": "Services & Skills",
+      "4": "Works",
+      "5": "Contacts"
     }
   },
   "body": {
@@ -29,7 +29,9 @@
   "btn": {
     "contact_me": "Contact me!!",
     "download_cv": "Download CV",
-    "send": "Send"
+    "send": "Send",
+    "back_home": "Back Home",
+    "more_projects": "Load More ({{count}} Projects)"
   },
   "skills": {
     "code": "// there are all services that i can provide\n\nconst my_services = {\n  web_frontend_developement: [\"React\", \"Angular\", \"Blade\"],\n  mobile_frontend_developement: [\"Flutter\"],\n  backend_developement: [\"Spring Boot\", \"Express Js\", \"Laravel\"],\n  tooling: [\"Golang\"],\n};\n\n/*I can also build desktop application with Java and C#\nHire me now !!*/",
@@ -41,6 +43,14 @@
       "5": "Languages",
       "6": "Mobile",
       "7": "Databases"
+    },
+    "service_domains": {
+      "frontend": "Frontend Development",
+      "backend": "Backend Development",
+      "iax": "IA & Data",
+      "database": "Database & Data",
+      "devops": "DevOps & Tools",
+      "design": "Design & UX"
     }
   },
   "works": {

@@ -1,4 +1,4 @@
-import Image from "../assets/images/sary.jpeg";
+import Image from "../assets/images/sary.jpg";
 import { CardBody, CardContainer, CardItem } from "../ui/3d-card";
 
 export function ThreeDCardDemo() {

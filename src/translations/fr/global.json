@@ -1,12 +1,12 @@
 {
   "headers": {
     "menu": {
-      "1": "acceuil",
-      "2": "mes-propos",
-      "3": "compétences",
-      "31": "compétences & services",
-      "4": "projets",
-      "5": "contacts"
+      "1": "Accueil",
+      "2": "A propos",
+      "3": "Services",
+      "31": "Services & Compétences",
+      "4": "Projets",
+      "5": "Contacts"
     }
   },
   "body": {
@@ -29,7 +29,9 @@
   "btn": {
     "contact_me": "Contactez-moi !!",
     "download_cv": "Télécharger CV",
-    "send": "Envoyer"
+    "send": "Envoyer",
+    "back_home": "Retour à l'accueil",
+    "more_projects": "Voir plus ({{count}} Projets)"
   },
   "skills": {
     "code": "// voici tous les services que je peux fournir\n\nconst my_services = {\n  web_frontend_developement: [\"React\", \"Angular\", \"Blade\"],\n  mobile_frontend_developement: [\"Flutter\"],\n  backend_developement: [\"Spring Boot\", \"Express Js\", \"Laravel\"],\n  tooling: [\"Golang\"],\n};\n\n/*Je peux aussi créer des applications de bureau avec Java et C#\nEngagez-moi maintenant !!*/",
@@ -41,6 +43,14 @@
       "5": "Langages de programmation",
       "6": "Mobile",
       "7": "Bases de données"
+    },
+    "service_domains": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "iax": "IA & Data",
+      "database": "Base de données & Data",
+      "devops": "DevOps & Outils",
+      "design": "Design & UX"
     }
   },
   "works": {

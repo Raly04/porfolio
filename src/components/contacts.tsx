@@ -13,11 +13,11 @@ import failedIcon from "../assets/close.png";
 
 function Contacts() {
   const [t] = useTranslation("global");
-  const containerRef = useRef(null);
-  const formRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [currentIcon, setCurrentIcon] = useState(sendIcon);
   const isInView = useInView(containerRef, { once: false, amount: 0.3 });
-  
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -29,10 +29,10 @@ function Contacts() {
       }
     }
   };
-  
+
   const imgVariants = {
-    hidden: { 
-      y: window.innerWidth < 768 ? 30 : 80, 
+    hidden: {
+      y: window.innerWidth < 768 ? 30 : 80,
       opacity: 0,
       scale: 0.9
     },
@@ -46,10 +46,10 @@ function Contacts() {
       }
     }
   };
-  
+
   const formVariants = {
-    hidden: { 
-      y: window.innerWidth < 768 ? 30 : 80, 
+    hidden: {
+      y: window.innerWidth < 768 ? 30 : 80,
       opacity: 0,
       scale: 0.9
     },
@@ -64,10 +64,10 @@ function Contacts() {
       }
     }
   };
-  
+
   const arrowVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       scale: 0,
       rotate: -45
     },
@@ -78,7 +78,7 @@ function Contacts() {
       transition: {
         duration: window.innerWidth < 768 ? 0.6 : 1,
         delay: window.innerWidth < 768 ? 0.2 : 0.6,
-        ease: window.innerWidth < 768 ? 
+        ease: window.innerWidth < 768 ?
           [0.25, 0.46, 0.45, 0.94] : // power2.out equivalent
           [0.34, 1.56, 0.64, 1] // elastic.out equivalent
       }
@@ -87,12 +87,13 @@ function Contacts() {
 
   //email config
 
-  const sendEmail = (e) => {
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setCurrentIcon(loadingIcon);
+    if (!formRef.current) return;
     emailjs
       .sendForm("service_3q3bmj9", "template_40zy4uo", formRef.current, {
-        publicKey: "WrJyXpj7LHMfVVgpg",
+        publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
       })
       .then(
         () => {
@@ -108,7 +109,7 @@ function Contacts() {
   return (
     <div id={t("headers.menu.5")} className="flex pt-28">
       <Space />
-      <motion.div 
+      <motion.div
         ref={containerRef}
         className="w-6/8 relative"
         variants={containerVariants}
@@ -116,7 +117,7 @@ function Contacts() {
         animate={isInView ? "visible" : "hidden"}
       >
         {/* Animated decorative elements */}
-        <motion.div 
+        <motion.div
           className="absolute -left-10 top-20 w-7 h-7 border-2 border-primary/20 rounded-full"
           animate={{
             x: [0, 12, 0],
@@ -130,7 +131,7 @@ function Contacts() {
             ease: "easeInOut",
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute right-1/4 -top-6 w-5 h-5 bg-primary/10 rounded-md rotate-45"
           animate={{
             y: [0, 15, 0],
@@ -144,7 +145,7 @@ function Contacts() {
             delay: 1,
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute right-10 top-40 w-4 h-4 border border-primary/30 rounded-full"
           animate={{
             scale: [1, 1.3, 1],
@@ -168,7 +169,7 @@ function Contacts() {
               <div className="text-primary mt-4">{t("body.i_m")} </div>
             </div>
             <div className="flex flex-row items-center justify-start gap-8">
-              <motion.div 
+              <motion.div
                 className="hidden lg:block"
                 variants={arrowVariants}
               >

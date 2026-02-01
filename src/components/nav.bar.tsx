@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {
-  Navbar,
-  NavbarMenuItem,
-  NavbarMenu,
-  NavbarContent,
-  NavbarItem,
-  Link,
-  NavbarMenuToggle,
-} from "@nextui-org/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { NyAinaLogo } from "./nyaina.logo";
 import SelectLang from "./select.lang";
 import { useTranslation } from "react-i18next";
+import { Menu, X } from "lucide-react";
 
 export default function NavBar() {
   const [t] = useTranslation("global");
@@ -52,7 +44,7 @@ export default function NavBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [menuItems]);
 
-  const navigateTo = (id) => {
+  const navigateTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({
@@ -77,7 +69,7 @@ export default function NavBar() {
 
   const menuItemVariants = {
     hidden: { x: -50, opacity: 0 },
-    visible: (i) => ({
+    visible: (i: number) => ({
       x: 0,
       opacity: 1,
       transition: {
@@ -95,25 +87,25 @@ export default function NavBar() {
       animate="visible"
       className="fixed top-0 left-0 right-0 z-50"
     >
-      <Navbar
-        maxWidth="full"
-        position="static"
-        isMenuOpen={isMenuOpen}
-        onMenuOpenChange={setIsMenuOpen}
-        className={`transition-all duration-300 ${
-          scrolled
-            ? "backdrop-blur-sm border-b border-primary/20 shadow-lg"
-            : ""
-        }`}
+      <nav
+        className={`w-full flex items-center justify-between px-6 py-4 transition-all duration-300 ${scrolled
+            ? "bg-background/80 backdrop-blur-sm border-b border-primary/20 shadow-lg"
+            : "bg-transparent"
+          }`}
       >
-        <NavbarContent className="sm:hidden" justify="start">
-          <NavbarMenuToggle
+        {/* Mobile Menu Toggle */}
+        <div className="sm:hidden flex items-center">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            className="text-primary p-2 hover:bg-primary/10 transition-colors duration-200"
-          />
-        </NavbarContent>
+            className="text-primary p-2 hover:bg-primary/10 transition-colors duration-200 rounded-md"
+          >
+            {isMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
 
-        <NavbarContent justify="start">
+        {/* Brand */}
+        <div className="flex justify-start">
           <motion.div
             className="flex flex-row items-center group cursor-pointer"
             whileHover={{ scale: 1.05 }}
@@ -155,11 +147,12 @@ export default function NavBar() {
               </motion.span>
             </motion.div>
           </motion.div>
-        </NavbarContent>
+        </div>
 
-        <NavbarContent className="hidden sm:flex gap-8" justify="center">
+        {/* Desktop Menu */}
+        <div className="hidden sm:flex gap-8 justify-center items-center">
           {menuItems.map((item, index) => (
-            <NavbarItem key={index}>
+            <div key={index}>
               <motion.div
                 variants={menuItemVariants}
                 initial="hidden"
@@ -168,38 +161,38 @@ export default function NavBar() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Link className="cursor-pointer group">
-                  <motion.span
-                    className="text-primary font-bold"
-                    whileHover={{ scale: 1.2 }}
-                  >
-                    #
-                  </motion.span>
-                  <motion.span
-                    className={`ml-1 transition-all duration-300 ${
-                      activeSection === item
-                        ? "text-primary font-semibold"
-                        : "text-foreground hover:text-primary"
-                    }`}
-                    onClick={() => navigateTo(item)}
-                    whileHover={{ x: 5 }}
-                  >
-                    {item}
-                  </motion.span>
+                <div className="cursor-pointer group flex flex-col items-center">
+                  <div className="flex items-center" onClick={() => navigateTo(item)}>
+                    <motion.span
+                      className="text-primary font-bold"
+                      whileHover={{ scale: 1.2 }}
+                    >
+                      #
+                    </motion.span>
+                    <motion.span
+                      className={`ml-1 transition-all duration-300 ${activeSection === item
+                          ? "text-primary font-semibold"
+                          : "text-foreground hover:text-primary"
+                        }`}
+                      whileHover={{ x: 5 }}
+                    >
+                      {item}
+                    </motion.span>
+                  </div>
                   <motion.div
-                    className={`h-0.5 mt-1 transition-all duration-300 ${
-                      activeSection === item
+                    className={`h-0.5 mt-1 transition-all duration-300 ${activeSection === item
                         ? "bg-primary w-full"
                         : "bg-primary w-0 group-hover:w-full"
-                    }`}
+                      }`}
                   />
-                </Link>
+                </div>
               </motion.div>
-            </NavbarItem>
+            </div>
           ))}
-        </NavbarContent>
+        </div>
 
-        <NavbarContent justify="end">
+        {/* Language Selector */}
+        <div className="flex justify-end">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -207,11 +200,12 @@ export default function NavBar() {
           >
             <SelectLang />
           </motion.div>
-        </NavbarContent>
+        </div>
 
+        {/* Mobile Menu Content */}
         <AnimatePresence>
           {isMenuOpen && (
-            <NavbarMenu className="bg-background/95 backdrop-blur-md">
+            <div className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-md shadow-xl border-b border-primary/20 pb-4 sm:hidden">
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -220,7 +214,7 @@ export default function NavBar() {
                 className="flex flex-col space-y-6 pt-8 px-4"
               >
                 {menuItems.map((item, index) => (
-                  <NavbarMenuItem key={`${item}-${index}`}>
+                  <div key={`${item}-${index}`}>
                     <motion.div
                       initial={{ x: -50, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
@@ -228,9 +222,8 @@ export default function NavBar() {
                       whileHover={{ x: 10, scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <Link
-                        className="w-full cursor-pointer group flex items-center p-3 rounded-lg hover:bg-primary/5 transition-all duration-300"
-                        size="lg"
+                      <button
+                        className="w-full cursor-pointer group flex items-center p-3 rounded-lg hover:bg-primary/5 transition-all duration-300 text-left"
                         onClick={() => navigateTo(item)}
                       >
                         <motion.span
@@ -242,15 +235,16 @@ export default function NavBar() {
                         <motion.span className="text-foreground ml-3 text-xl group-hover:text-primary transition-colors duration-300">
                           {item}
                         </motion.span>
-                      </Link>
+                      </button>
                     </motion.div>
-                  </NavbarMenuItem>
+                  </div>
                 ))}
               </motion.div>
-            </NavbarMenu>
+            </div>
           )}
         </AnimatePresence>
-      </Navbar>
+      </nav>
     </motion.div>
   );
 }
+

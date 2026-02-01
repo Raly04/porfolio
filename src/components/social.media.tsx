@@ -21,7 +21,7 @@ export default function SocialMedia() {
     },
     {
       name: "LinkedIn",
-      url: "https://www.linkedin.com/in/raly-andry-ny-aina-kadmiel-1768aa280/",
+      url: "https://www.linkedin.com/in/ny-aina-raly-539b383a8/",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="w-6 h-6">
           <path
@@ -107,7 +107,7 @@ export default function SocialMedia() {
               aria-label={`Visit ${link.name}`}
             >
               {link.icon}
-              
+
               {/* Tooltip */}
               <motion.div
                 className="absolute left-full ml-4 top-1/2 transform -translate-y-1/2 px-3 py-2 bg-primary text-background text-sm rounded-lg font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none"

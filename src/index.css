@@ -29,7 +29,7 @@
 }
 
 .input {
-    @apply bg-background border-1 border-secondary p-2;
+    @apply bg-background border border-secondary p-2;
 }
 
 /* Custom animations */

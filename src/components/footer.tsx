@@ -34,7 +34,7 @@ function Footer() {
           </div>
           <div className="text-secondary mt-16 flex flex-col items-center justify-center">
             <SocialMediaFooter />
-            <div>Copyright 2024 . {t("others.m_b_na")}</div>
+            <div>Copyright 2026 . {t("others.m_b_na")}</div>
           </div>
         </div>
       </div>
