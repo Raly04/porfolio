@@ -101,6 +101,13 @@
       "title": "Limitless",
       "description": "Limitless est une application web tout-en-un dédiée à l’achat, l’hébergement et la vente de formations 100 % en ligne. Elle a été conçue pour accompagner les créateurs, formateurs, à diffuser leurs connaissances, développer leur impact, et générer des revenus ; sans complexité technique.",
       "isSecret": false
+    },
+    "8": {
+      "image": "heliosol.png",
+      "technologies": "Next-JS Hedera-Hasgraph Web3 Gemini",
+      "title": "HelioSol",
+      "description": "Une plateforme de réseau d'infrastructure physique décentralisée (DePIN) qui permet aux communautés africaines de gérer, de surveiller et d'échanger des ressources en énergie solaire et en eau via des transactions de pair à pair sécurisées par la technologie blockchain.",
+      "isSecret": false
     }
   },
   "form": {

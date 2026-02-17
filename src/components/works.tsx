@@ -10,6 +10,7 @@ import aceem from "../assets/images/aceem.png";
 import port from "../assets/images/portfolio.png";
 import theend from "../assets/images/theend.png";
 import ls from "../assets/images/ls.png";
+import helio from "../assets/images/heliosol.png";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -38,22 +39,22 @@ export default function Works() {
 
     // Start animations when in view
     if (isInView) {
-      controls.start('visible');
+      controls.start("visible");
     }
 
     // Apply will-change for better performance
-    const elements = document.querySelectorAll('.work-animate');
-    elements.forEach(el => {
+    const elements = document.querySelectorAll(".work-animate");
+    elements.forEach((el) => {
       if (el instanceof HTMLElement) {
-        el.style.willChange = 'transform, opacity';
+        el.style.willChange = "transform, opacity";
       }
     });
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      elements.forEach(el => {
+      elements.forEach((el) => {
         if (el instanceof HTMLElement) {
-          el.style.willChange = 'auto';
+          el.style.willChange = "auto";
         }
       });
     };
@@ -68,9 +69,9 @@ export default function Works() {
         staggerChildren: 0.05, // Faster staggering
         delayChildren: 0.05, // Reduced delay
         duration: 0.3, // Faster fade-in
-        ease: "linear" // Simple easing for opacity
-      }
-    }
+        ease: "linear", // Simple easing for opacity
+      },
+    },
   };
 
   const itemVariants = {
@@ -91,8 +92,8 @@ export default function Works() {
         damping: window.innerWidth < 768 ? 20 : 16,
         mass: 0.8,
         delay: index * (window.innerWidth < 768 ? 0.07 : 0.1), // Reduced delay between items
-      }
-    })
+      },
+    }),
   };
 
   const workBoxes = [
@@ -158,6 +159,15 @@ export default function Works() {
       isSecret: false,
       category: "internship",
     },
+    {
+      image: helio,
+      technologies: t("works.8.technologies"),
+      title: t("works.8.title"),
+      description: t("works.8.description"),
+      link: "https://heliosol-flow.vercel.app/",
+      isSecret: false,
+      category: "competitions",
+    },
   ];
 
   // Filter projects based on active filter
@@ -171,7 +181,10 @@ export default function Works() {
 
   // Create masonry columns
   const createMasonryColumns = () => {
-    const columnArrays = Array.from({ length: columns }, () => [] as typeof workBoxes);
+    const columnArrays = Array.from(
+      { length: columns },
+      () => [] as typeof workBoxes,
+    );
 
     displayedProjects.forEach((box, index) => {
       const columnIndex = index % columns;
@@ -264,10 +277,11 @@ export default function Works() {
               <motion.button
                 key={filter.key}
                 onClick={() => setActiveFilter(filter.key)}
-                className={`px-6 py-2 rounded-full border transition-all duration-300 ${activeFilter === filter.key
-                  ? "bg-primary text-background border-primary"
-                  : "bg-background text-foreground border-secondary hover:bg-primary/10 hover:text-primary hover:border-primary/30"
-                  }`}
+                className={`px-6 py-2 rounded-full border transition-all duration-300 ${
+                  activeFilter === filter.key
+                    ? "bg-primary text-background border-primary"
+                    : "bg-background text-foreground border-secondary hover:bg-primary/10 hover:text-primary hover:border-primary/30"
+                }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -327,7 +341,9 @@ export default function Works() {
             }}
             whileTap={{ scale: 0.95 }}
           >
-            {t("btn.more_projects", { count: remainingCount > 0 ? remainingCount : "" }).replace("()", "")}
+            {t("btn.more_projects", {
+              count: remainingCount > 0 ? remainingCount : "",
+            }).replace("()", "")}
           </motion.button>
         </motion.div>
       </div>
