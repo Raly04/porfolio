@@ -89,7 +89,7 @@ export default function AllProjects() {
       link: "https://github.com/Raly04/porfolio",
       featured: true,
       isSecret: true,
-      category: "personal",
+      category: "innovation",
     },
     {
       image: p1,
@@ -97,7 +97,7 @@ export default function AllProjects() {
       title: t("works.2.title"),
       description: t("works.2.description"),
       link: "https://github.com/Raly04/novice-immersion",
-      category: "competitions",
+      category: "education",
     },
     {
       image: smmec,
@@ -105,7 +105,7 @@ export default function AllProjects() {
       title: t("works.3.title"),
       description: t("works.3.description"),
       isSecret: true,
-      category: "internship",
+      category: "banking",
     },
     {
       image: sal,
@@ -114,7 +114,7 @@ export default function AllProjects() {
       description: t("works.4.description"),
       isSecret: true,
       featured: true,
-      category: "competitions",
+      category: "healthcare",
     },
     {
       image: aceem,
@@ -122,7 +122,7 @@ export default function AllProjects() {
       title: t("works.5.title"),
       description: t("works.5.description"),
       isSecret: true,
-      category: "internship",
+      category: "education",
     },
     {
       image: theend,
@@ -132,7 +132,7 @@ export default function AllProjects() {
       isSecret: false,
       link: "https://infinity.madagascar.webcup.hodi.host",
       featured: true,
-      category: "competitions",
+      category: "innovation",
     },
     {
       image: ls,
@@ -141,7 +141,7 @@ export default function AllProjects() {
       description: t("works.7.description"),
       link: "https://ls.netlink-digital.com/limitless",
       isSecret: false,
-      category: "internship",
+      category: "education",
     },
     {
       image: helio,
@@ -150,7 +150,7 @@ export default function AllProjects() {
       description: t("works.8.description"),
       link: "https://heliosol-flow.vercel.app/",
       isSecret: false,
-      category: "competitions",
+      category: "innovation",
     },
   ];
 
@@ -200,9 +200,10 @@ export default function AllProjects() {
           >
             {[
               { key: "all", label: "All" },
-              { key: "internship", label: "Internship" },
-              { key: "personal", label: "Personal" },
-              { key: "competitions", label: "Competitions" },
+              { key: "banking", label: "Banking" },
+              { key: "education", label: "Education" },
+              { key: "innovation", label: "Innovation" },
+              { key: "healthcare", label: "Healthcare" },
             ].map((filter) => (
               <motion.button
                 key={filter.key}

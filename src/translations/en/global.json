@@ -31,7 +31,9 @@
     "download_cv": "Download CV",
     "send": "Send",
     "back_home": "Back Home",
-    "more_projects": "Load More ({{count}} Projects)"
+    "more_projects": "Load More ({{count}} Projects)",
+    "view_projects": "View project",
+    "private_project": "Private project"
   },
   "skills": {
     "code": "// there are all services that i can provide\n\nconst my_services = {\n  web_frontend_developement: [\"React\", \"Angular\", \"Blade\"],\n  mobile_frontend_developement: [\"Flutter\"],\n  backend_developement: [\"Spring Boot\", \"Express Js\", \"Laravel\"],\n  tooling: [\"Golang\"],\n};\n\n/*I can also build desktop application with Java and C#\nHire me now !!*/",
@@ -52,6 +54,13 @@
       "devops": "DevOps & Tools",
       "design": "Design & UX"
     }
+  },
+  "categories": {
+    "all": "All",
+    "banking": "Banking",
+    "education": "Education",
+    "innovation": "Innovation",
+    "healthcare": "Healthcare"
   },
   "works": {
     "1": {
@@ -107,6 +116,13 @@
       "technologies": "Next-JS Hedera-Hasgraph Web3 Gemini",
       "title": "HelioSol",
       "description": "A decentralized physical infrastructure network (DePIN) platform that enables African communities to manage, monitor, and trade solar energy and water resources through peer-to-peer transactions secured by blockchain technology.",
+      "isSecret": false
+    },
+    "9": {
+      "image": "swum.png",
+      "technologies": "React Spring-Boot MySQL",
+      "title": "SWUM Smart Enrollment",
+      "description": "Smart enrollment management with multitenancy for multiple establishments, RBAC, scheduled result publishing with cron automation, and cross-establishment enrollment.",
       "isSecret": false
     }
   },

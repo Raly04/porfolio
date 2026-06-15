@@ -3,9 +3,11 @@ import MyButton from "./my.button";
 import openIcon from "../assets/component.svg";
 import secretIcon from "../assets/lock.svg";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 // eslint-disable-next-line react/prop-types
 function WorkBox({ link, image, description, title, technologies, isSecret, featured }) {
+  const [t] = useTranslation("global");
 
   const gotToGithub = () => {
     window.open(link);
@@ -68,7 +70,7 @@ function WorkBox({ link, image, description, title, technologies, isSecret, feat
                 borderColor="primary"
                 bg="primary"
                 textColor="background"
-                text="View Code"
+                text={t("btn.view_projects")}
                 action={gotToGithub}
                 img={openIcon}
                 className="flex-1 min-w-0"
@@ -78,8 +80,8 @@ function WorkBox({ link, image, description, title, technologies, isSecret, feat
                 borderColor="secondary"
                 bg="background"
                 textColor="secondary"
-                text="Private Repo"
-                action={() => console.log("This repo is private")}
+                text={t("btn.private_project")}
+                action={() => console.log("This project is private")}
                 img={secretIcon}
                 className="flex-1 min-w-0"
                 disabled={true}

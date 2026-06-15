@@ -11,6 +11,7 @@ import port from "../assets/images/portfolio.png";
 import theend from "../assets/images/theend.png";
 import ls from "../assets/images/ls.png";
 import helio from "../assets/images/heliosol.png";
+import swum from "../assets/images/swum.png";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -105,7 +106,7 @@ export default function Works() {
       link: "https://github.com/Raly04/porfolio",
       featured: true,
       isSecret: true,
-      category: "personal",
+      category: "innovation",
     },
     {
       image: p1,
@@ -113,7 +114,7 @@ export default function Works() {
       title: t("works.2.title"),
       description: t("works.2.description"),
       link: "https://github.com/Raly04/novice-immersion",
-      category: "competitions",
+      category: "innovation",
     },
     {
       image: smmec,
@@ -121,7 +122,7 @@ export default function Works() {
       title: t("works.3.title"),
       description: t("works.3.description"),
       isSecret: true,
-      category: "internship",
+      category: "banking",
     },
     {
       image: sal,
@@ -130,7 +131,7 @@ export default function Works() {
       description: t("works.4.description"),
       isSecret: true,
       featured: true,
-      category: "competitions",
+      category: "healthcare",
     },
     {
       image: aceem,
@@ -138,7 +139,7 @@ export default function Works() {
       title: t("works.5.title"),
       description: t("works.5.description"),
       isSecret: true,
-      category: "internship",
+      category: "education",
     },
     {
       image: theend,
@@ -148,7 +149,7 @@ export default function Works() {
       isSecret: false,
       link: "https://infinity.madagascar.webcup.hodi.host",
       featured: true,
-      category: "competitions",
+      category: "innovation",
     },
     {
       image: ls,
@@ -157,7 +158,7 @@ export default function Works() {
       description: t("works.7.description"),
       link: "https://ls.netlink-digital.com/limitless",
       isSecret: false,
-      category: "internship",
+      category: "education",
     },
     {
       image: helio,
@@ -166,7 +167,16 @@ export default function Works() {
       description: t("works.8.description"),
       link: "https://heliosol-flow.vercel.app/",
       isSecret: false,
-      category: "competitions",
+      category: "innovation",
+    },
+    {
+      image: swum,
+      technologies: t("works.9.technologies"),
+      title: t("works.9.title"),
+      description: t("works.9.description"),
+      link: "https://swum.onrender.com",
+      isSecret: false,
+      category: "education",
     },
   ];
 
@@ -269,10 +279,11 @@ export default function Works() {
             transition={{ duration: 0.6 }}
           >
             {[
-              { key: "all", label: "All" },
-              { key: "internship", label: "Internship" },
-              { key: "personal", label: "Personal" },
-              { key: "competitions", label: "Competitions" },
+              { key: "all", label: t("categories.all") },
+              { key: "banking", label: t("categories.banking") },
+              { key: "education", label: t("categories.education") },
+              { key: "innovation", label: t("categories.innovation") },
+              { key: "healthcare", label: t("categories.healthcare") },
             ].map((filter) => (
               <motion.button
                 key={filter.key}
